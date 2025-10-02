@@ -74,7 +74,7 @@ int main(int argc, char **argv) {
                 FILE *f = fopen(fname, "r");
                 if (!f) {
                     fprintf(stderr, "mycat: cannot open '%s'\n", fname);
-                    continue;
+                    break;
                 }
                 print_file(f, flag_n, flag_b, flag_E);
                 fclose(f);
