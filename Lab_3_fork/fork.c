@@ -4,9 +4,10 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <signal.h>
-#include <string.h>
+#include <bits/sigaction.h>
+
 void exit_handler() {
-    printf("atexit handler, process %d quitting\n", getpid());
+    printf("atexit handler\n");
 }
 
 void sig_handler(int status) {
@@ -26,7 +27,6 @@ int main() {
     int status;
 
     struct sigaction sa;
-	memset(&sa, 0, sizeof(sa));
     sa.sa_handler = term_handler;
     sigemptyset(&sa.sa_mask);
 
@@ -48,11 +48,7 @@ int main() {
     default:
         wait(&status);
         printf("PARENT: pid = %d, ppid = %d\n", getpid(), getppid());
-        if (WIFEXITED(status)) {
-            printf("PARENT: child exited with code %d\n", WEXITSTATUS(status));
-        } else if (WIFSIGNALED(status)) {
-            printf("PARENT: child killed by signal %d\n", WTERMSIG(status));
-        }
+        printf("PARENT: child exit status = %d\n", WEXITSTATUS(status));
         
         exit(0);
     }
