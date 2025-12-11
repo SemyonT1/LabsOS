@@ -5,12 +5,10 @@
 #include <string.h>
 #include <time.h>
 #include <fcntl.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 
 const char* myfifo = "myfifo";
-
 struct tm get_time();
 
 #define BUF_SIZE 1024
