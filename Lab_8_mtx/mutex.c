@@ -78,6 +78,6 @@ int main() {
     for (int i = 0; i < READERS; ++i) {
         pthread_join(readers[i], NULL);
     }
-
+    pthread_mutex_destroy(&lock);
     return 0;
 }
